@@ -202,12 +202,14 @@
   }
   function check() {
     var now = Date.now();
+    // 滚到页面最底下时，屏幕里还没搭的段都开搭（页脚永远滚不到 85% 那条线）
+    var atEnd = scrollY + H >= document.documentElement.scrollHeight - 4;
     segs.forEach(function (s) {
       if (s.state === "done") return;
       var top = s.y - scrollY, bottom = top + s.h;
       if (s.state === "wait") {
         if (bottom < 0) return reveal(s, true);           // 一下滚过去了：直接露出来，不在看不见的地方搭
-        if (top < H * 0.85) { s.state = "build"; buildSeg(s).catch(function () { reveal(s); }); }
+        if (top < H * 0.85 || (atEnd && top < H)) { s.state = "build"; buildSeg(s).catch(function () { reveal(s); }); }
       } else if (now - s.t0 > 12000 || (s.sticky && Math.abs(scrollY - s.lockY) > 30)) {
         reveal(s);                                         // 卡住了，或者钉住的大区块里一滚动，洞就对不齐：直接收掉
       }
@@ -390,9 +392,11 @@
 
   // 等页面画好（load 之后再等一会儿，最多 2.5 秒）再切段开搭
   var started = false;
+  var t0 = Date.now();
   function go() {
     if (started) return; started = true;
-    setTimeout(function () { try { setup(); } catch (e) { bail(); } }, 350);
+    // 页面再快，开场那一圈也至少转 1.2 秒
+    setTimeout(function () { try { setup(); } catch (e) { bail(); } }, Math.max(350, 1200 - (Date.now() - t0)));
   }
   if (document.readyState === "complete") go(); else addEventListener("load", go);
   setTimeout(go, 2500);
