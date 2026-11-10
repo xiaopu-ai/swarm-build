@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>swarm-build 示例页</title>
+<style>
+  :root { --ink:#111; --sub:#6b7280; --line:#e5e7eb; --bg:#fafafa; }
+  * { box-sizing:border-box; margin:0; }
+  body { font:16px/1.7 -apple-system,"PingFang SC",system-ui,sans-serif; color:var(--ink); background:var(--bg); }
+  .wrap { max-width:960px; margin:0 auto; padding:0 24px; }
+  header { display:flex; justify-content:space-between; align-items:center; padding:22px 0; }
+  header b { font-size:18px; }
+  header a { color:var(--ink); text-decoration:none; margin-left:20px; font-size:14px; }
+  .hero { padding:110px 0 120px; }
+  .hero h1 { font-size:56px; line-height:1.1; letter-spacing:-.02em; }
+  .hero p { font-size:19px; color:var(--sub); margin-top:18px; max-width:600px; }
+  .hero code, li code { font:14px ui-monospace,Menlo,monospace; background:#fff; border:1px solid var(--line); border-radius:6px; padding:2px 6px; }
+  .btn { display:inline-block; margin-top:28px; font-weight:600; font-size:15px; background:var(--ink); color:#fff; border-radius:999px; padding:14px 22px; text-decoration:none; }
+  section { padding:70px 0; }
+  h2 { font-size:34px; letter-spacing:-.01em; margin-bottom:22px; }
+  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:16px; padding:22px; }
+  .card h3 { font-size:18px; }
+  .card p { color:var(--sub); font-size:14.5px; margin-top:6px; }
+  .dark { background:#111; color:#f5f5f5; }
+  .dark .card { background:#1a1a1a; border-color:#2a2a2a; }
+  .dark .card p { color:#a3a3a3; }
+  ol { padding-left:22px; } ol li { margin:10px 0; }
+  pre { background:#111; color:#e5e5e5; border-radius:14px; padding:20px 22px; font:14px/1.7 ui-monospace,Menlo,monospace; overflow:auto; }
+  footer { border-top:1px solid var(--line); padding:26px 0 60px; color:var(--sub); font-size:14px; }
+  @media (max-width:700px) { .hero h1 { font-size:38px; } .grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><b>swarm-build</b><nav><a href="#how">效果</a><a href="#install">怎么装</a><a href="#use">怎么用</a></nav></header>
+  <div class="hero">
+    <h1>让一群 AI 光标，把你的网页搭出来。</h1>
+    <p>打开网页，一群彩色光标先围成一圈；往下滚，下面先是空白，光标飞过去拉框、标尺寸，把内容一块块搭出来。加一行 <code>&lt;script&gt;</code> 就有。</p>
+    <a class="btn" href="#install">装上这个技能</a>
+  </div>
+</div>
+<section id="how">
+  <div class="wrap">
+    <h2>效果</h2>
+    <div class="grid">
+      <div class="card"><h3>开场一圈</h3><p>页面还在加载时，约 20 个光标在屏幕中间转圈等着。</p></div>
+      <div class="card"><h3>滚到哪搭到哪</h3><p>往下滚，下面先是空白；光标从屏幕边飞进来，一块块把内容搭出来。</p></div>
+      <div class="card"><h3>搭完就走</h3><p>这一屏搭完，光标就淡出；遇到下一片空白，再来一批。</p></div>
+    </div>
+  </div>
+</section>
+<section class="dark">
+  <div class="wrap">
+    <h2>不碰你的页面</h2>
+    <div class="grid">
+      <div class="card"><h3>只盖一层</h3><p>空白是盖在上面的一层，网页本身的元素一个不改。</p></div>
+      <div class="card"><h3>复杂页面也行</h3><p>3D、动画、脚本后来生成的内容、钉住的区块，都照常。</p></div>
+      <div class="card"><h3>随时能关</h3><p>系统开了「减少动态效果」就不播；地址后面加 ?noswarm 临时关掉。</p></div>
+    </div>
+  </div>
+</section>
+<section id="install">
+  <div class="wrap">
+    <h2>怎么装</h2>
+    <ol>
+      <li>把仓库拉下来：<code>git clone https://github.com/xiaopu-ai/swarm-build</code></li>
+      <li>你的 AI 工具支持技能（SKILL.md）的话，把 <code>skills/swarm-build</code> 这个文件夹放进它的技能目录。</li>
+      <li>不支持也没关系：把仓库链接发给它，让它照 <code>skills/swarm-build/SKILL.md</code> 做。</li>
+    </ol>
+  </div>
+</section>
+<section id="use">
+  <div class="wrap">
+    <h2>怎么用</h2>
+    <p style="margin-bottom:18px">对你的 AI 说一句：</p>
+    <pre>给我的网页加上 swarm-build 加载效果</pre>
+    <p style="margin:18px 0">它会把 swarm.js 放进你的项目，在页面最后加这一行：</p>
+    <pre>&lt;script src="swarm.js"&gt;&lt;/script&gt;</pre>
+  </div>
+</section>
+<div class="wrap"><footer>swarm-build · MIT · 示例页</footer></div>
+<script src="../skills/swarm-build/assets/swarm.js"></script>
+</body>
+</html>
